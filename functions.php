@@ -42,6 +42,9 @@ function _s_setup() {
 	 */
 	add_theme_support( 'post-thumbnails' );
 
+	// Set the default post thumbnail size
+	set_post_thumbnail_size( 892, 502 ); // 892 pixels wide by 502 pixels tall, resize mode
+
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
 		'primary' => esc_html__( 'Primary Menu', '_s' ),
@@ -88,7 +91,7 @@ add_action( 'after_setup_theme', '_s_setup' );
  * @global int $content_width
  */
 function _s_content_width() {
-	$GLOBALS['content_width'] = apply_filters( '_s_content_width', 640 );
+	$GLOBALS['content_width'] = apply_filters( '_s_content_width', 892 );
 }
 add_action( 'after_setup_theme', '_s_content_width', 0 );
 
@@ -99,9 +102,72 @@ add_action( 'after_setup_theme', '_s_content_width', 0 );
  */
 function _s_widgets_init() {
 	register_sidebar( array(
+		'name'          => esc_html__( 'Featured Area', '_s' ),
+		'id'            => 'featured-area',
+		'description'   => 'Featured section on all pages.',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+	) );
+	register_sidebar( array(
+		'name'          => esc_html__( 'Call To Action', '_s' ),
+		'id'            => 'cta-area',
+		'description'   => 'For 1 to 4 call to action widgets on all pages.',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+	) );
+	register_sidebar( array(
+		'name'          => esc_html__( 'Announcement', '_s' ),
+		'id'            => 'announcement-area',
+		'description'   => 'For an announcement widget on all pages.',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+	) );
+	register_sidebar( array(
 		'name'          => esc_html__( 'Sidebar', '_s' ),
-		'id'            => 'sidebar-1',
-		'description'   => '',
+		'id'            => 'sidebar-default',
+		'description'   => 'Default sidebar used on all pages with a sidebar.',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+	) );
+	register_sidebar( array(
+		'name'          => esc_html__( 'Sponsors', '_s' ),
+		'id'            => 'sponsors-area',
+		'description'   => 'For adding sponsor widgets to all pages.',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+	) );
+	register_sidebar( array(
+		'name'          => esc_html__( 'Footer Widgets', '_s' ),
+		'id'            => 'footer-widgets',
+		'description'   => 'For 1 to 4 footer widgets on all pages.',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+	) );
+	register_sidebar( array(
+		'name'          => esc_html__( 'Footer Area', '_s' ),
+		'id'            => 'footer-area',
+		'description'   => 'For a footer widget on all pages.',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+	) );
+	register_sidebar( array(
+		'name'          => esc_html__( '404 Area', '_s' ),
+		'id'            => '404-area',
+		'description'   => 'For adding widgets to the 404 page.',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
 		'before_title'  => '<h2 class="widget-title">',
@@ -116,6 +182,10 @@ add_action( 'widgets_init', '_s_widgets_init' );
 function _s_scripts() {
 	wp_enqueue_style( '_s-style', get_stylesheet_uri() );
 
+	wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css', array(), '4.5.0', 'all' );
+
+	wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,400italic,700,700italic', array(), false, 'all' );
+
 	wp_enqueue_script( '_s-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 
 	wp_enqueue_script( '_s-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
@@ -125,11 +195,6 @@ function _s_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', '_s_scripts' );
-
-/**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
 
 /**
  * Custom template tags for this theme.

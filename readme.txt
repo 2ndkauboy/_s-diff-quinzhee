@@ -1,6 +1,6 @@
-=== _s ===
+=== Quinzhee ===
 
-Contributors: automattic
+Contributors: jleuze
 Tags: translation-ready, custom-background, theme-options, custom-menu, post-formats, threaded-comments
 
 Requires at least: 4.0
@@ -9,11 +9,11 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A starter theme called _s, or underscores.
+A cool new starter theme for WordCamp sites!
 
 == Description ==
 
-Hi. I'm a starter theme called _s, or underscores, if you like. I'm a theme meant for hacking so don't use me as a Parent Theme. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.
+A new theme for WordCamp sites that can be used right out of the box or customized to make your own awesome WordCamp site!
 
 == Installation ==
 	
@@ -25,7 +25,7 @@ Hi. I'm a starter theme called _s, or underscores, if you like. I'm a theme mean
 
 = Does this theme support any plugins? =
 
-_s includes support for Infinite Scroll in Jetpack.
+Quinzhee includes support for Infinite Scroll in Jetpack.
 
 == Changelog ==
 
